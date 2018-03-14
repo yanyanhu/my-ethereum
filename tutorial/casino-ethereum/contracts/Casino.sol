@@ -15,9 +15,12 @@ contract Casino {
 
     mapping(address => Player) public playerInfo;
 
-    function Casino(uint256 _minimumBet) public {
+    function Casino(uint256 _minimumBet, uint256 _maxAmountOfBets) public {
         owner = msg.sender;
-        if(_minimumBet != 0) minimumBet = _minimumBet;
+        if(_minimumBet != 0)
+            minimumBet = _minimumBet;
+        if(_maxAmountOfBets !=0 )
+            maxAmountOfBets = _maxAmountOfBets;
     }
 
     function kill() public {
@@ -75,6 +78,9 @@ contract Casino {
                 winners[j].transfer(winnerEtherAmount);
             }
         }
+
+        totalBet = 0;
+        numberOfBets = 0;
     }
 
     function() public payable {}
